@@ -5,17 +5,15 @@ class DateFormatter
 {
     public function reverse(string $date): string
     {
-        $timestamp = strtotime($date);
-
-        if($timestamp === false)
-        {
-            throw new \InvalidArgumentException('Invalid date : '.$date);
-        }
-
-        return date('Y-m-d', strtotime($date));
+        return date('Y-m-d', $this->parseDate($date));
     }
 
     public function regular(string $date): string
+    {
+        return date('d-m-Y', $this->parseDate($date));
+    }
+
+    public function parseDate($date)
     {
         $timestamp = strtotime($date);
 
@@ -24,6 +22,6 @@ class DateFormatter
             throw new \InvalidArgumentException('Invalid date : '.$date);
         }
 
-        return date('d-m-Y', strtotime($date));
+        return $timestamp;
     }
 }

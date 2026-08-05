@@ -42,4 +42,14 @@ class DateFormatterTest extends TestCase
 
         $formmater->regular('Hello');
     }
+
+    public function test_reverse_accept_same_format(): void
+    {
+        $formatter = new DateFormatter();
+
+        $this->assertSame(
+            '2026-08-06',
+            $formatter->reverse('2026-08-06')
+        );
+    }
 }
