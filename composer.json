@@ -1,0 +1,19 @@
+{
+    "name": "rookiextreme/laravel-toolkit",
+    "description": "Wrapper for commonly used code for a much shorter syntax in controllers and such",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rookiextreme\\LaravelToolkit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rookiextreme",
+            "email": "meor.nazrin1994@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
