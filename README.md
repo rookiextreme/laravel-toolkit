@@ -21,6 +21,39 @@ $dateFormatter->regular('2026-08-06');
 // 06-08-2026
 ```
 
+### API Response Helper
+
+Build the payload
+```php
+use RookieXtreme\LaravelToolkit\Response\ApiResponse;
+
+$apiResponse = new ApiResponse();
+
+//Status can be either 'success' or 'error' only
+
+$payload = $apiResponse->buildMessagePayload('success', 'Some label');
+/*
+    [
+        'status' => 'success',
+        'message' => 'Some label'
+    ]
+*/
+
+$payload = $apiResponse->buildDataPayload('success', ['id' => 1, 'something' => true]);
+/*
+    [
+        'status' => 'success',
+        'data' => ['id' => 1, 'something' => true]
+    ]
+*/
+```
+
+Send payload to build JSON response
+```php
+$apiResponse->jsonResponse($payload)
+//returns Laravel JSON response object
+```
+
 ## Features
 
 - ✅ Date Formatter
