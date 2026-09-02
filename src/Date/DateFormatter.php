@@ -13,7 +13,7 @@ class DateFormatter
         return date('d-m-Y', $this->parseDate($date));
     }
 
-    public function parseDate($date)
+    public function parseDate($date): int
     {
         $timestamp = strtotime($date);
 

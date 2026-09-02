@@ -53,11 +53,161 @@ Send payload to build JSON response
 $apiResponse->jsonResponse($payload)
 //returns Laravel JSON response object
 ```
+## File Upload
+
+The `FileUpload` feature provides a simple way to upload files with configurable upload options.
+
+The uploaded file must be provided as an `Illuminate\Http\UploadedFile` object.
+
+### Basic Usage
+
+```php
+use Illuminate\Http\UploadedFile;
+use Rookiextreme\LaravelToolkit\Upload\UploadOptions;
+
+$upload->uploadFileInApp(
+    $image,
+    'uploads/images',
+    new UploadOptions(
+        extensions: ['pdf']
+    )
+);
+```
+
+`$image` must be an `UploadedFile` object.
+
+### Upload Options
+
+`UploadOptions` allows you to configure how the file should be uploaded.
+
+```php
+class UploadOptions
+{
+    public function __construct(
+        public array $extensions = [],
+        public bool $useOriginalName = false,
+        public bool $useOriginalNameUnique = false,
+        public bool $useRandomIntName = false,
+        public int $maxSize = 0,
+        public int $minSize = 0,
+        public string $destination = 'storage',
+        public string $disk = 'public'
+    ){}
+}
+```
+
+| Option                  | Type     | Default     | Description                                                       |
+| ----------------------- | -------- | ----------- | ----------------------------------------------------------------- |
+| `extensions`            | `array`  | `[]`        | Allowed file extensions.                                          |
+| `useOriginalName`       | `bool`   | `false`     | Saves the file using its original filename.                       |
+| `useOriginalNameUnique` | `bool`   | `false`     | Saves the original filename with a random number appended.        |
+| `useRandomIntName`      | `bool`   | `false`     | Generates a random integer as the filename.                       |
+| `maxSize`               | `int`    | `0`         | Maximum allowed file size.                                        |
+| `minSize`               | `int`    | `0`         | Minimum allowed file size.                                        |
+| `destination`           | `string` | `'storage'` | Determines whether the file is uploaded to `storage` or `public`. |
+| `disk`                  | `string` | `'public'`  | Laravel filesystem disk used when uploading to storage.           |
+
+### Filename Options
+
+#### Original Filename
+
+```php
+new UploadOptions(
+    extensions: ['jpg'],
+    useOriginalName: true
+);
+```
+
+#### Original Filename with Random Number
+
+```php
+new UploadOptions(
+    extensions: ['jpg'],
+    useOriginalNameUnique: true
+);
+```
+
+Example:
+
+```text
+profile_48291.jpg
+```
+
+#### Random Integer Filename
+
+```php
+new UploadOptions(
+    extensions: ['jpg'],
+    useRandomIntName: true
+);
+```
+
+Example:
+
+```text
+48291.jpg
+```
+
+### File Size
+
+Maximum and minimum file sizes can be configured using `maxSize` and `minSize`.
+
+```php
+new UploadOptions(
+    extensions: ['jpg', 'png'],
+    maxSize: 2048,
+    minSize: 100
+);
+```
+
+### Destination
+
+By default, files are uploaded to the `storage` destination.
+
+```php
+new UploadOptions(
+    extensions: ['pdf']
+);
+```
+
+Files can also be uploaded directly to the `public` directory:
+
+```php
+new UploadOptions(
+    extensions: ['jpg'],
+    destination: 'public'
+);
+```
+
+### Storage Disk
+
+When using the `storage` destination, a specific Laravel filesystem disk can be selected.
+
+```php
+new UploadOptions(
+    extensions: ['pdf'],
+    destination: 'storage',
+    disk: 'public'
+);
+```
+
+### Return Value
+
+The upload method returns an array containing the uploaded file's path and filename.
+
+```php
+[
+    'path' => 'uploads/images',
+    'name' => '48291.jpg'
+]
+```
+
 
 ## Features
 
 - ✅ Date Formatter
 - ✅ API Response Helper
+- ✅ File Uploaded
 - 🚧 More coming soon
 
 ## Installation
@@ -70,7 +220,7 @@ composer require rookiextreme/laravel-toolkit
 
 - [x] Date Formatter
 - [x] API Response Helper
-- [ ] Image Uploader
+- [x] Image Uploader
 - [ ] Model Actions
 - [ ] Validation Helpers
 - [ ] File Utilities
