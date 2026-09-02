@@ -273,6 +273,7 @@ The mailing job is queued and can be customized according to the application's r
 - ✅ Date Formatter
 - ✅ API Response Helper
 - ✅ File Uploaded
+- ✅ Predefined Mailing Job Command
 - 🚧 More coming soon
 
 ## Installation
