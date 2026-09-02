@@ -202,6 +202,71 @@ The upload method returns an array containing the uploaded file's path and filen
 ]
 ```
 
+### Artisan Command
+
+The `toolkit:make-mail-job` command provides a quick way to generate a predefined mailing job template in the application's `app/Jobs` directory.
+
+Instead of manually creating and setting up a new queued mailing job every time a new mailing scenario is needed, the command generates the basic job structure automatically. The generated job can then be customized according to the application's requirements.
+
+```bash
+php artisan toolkit:make-mail-job {filename?}
+```
+
+If no filename is provided, the command will prompt for one. If no value is entered, a default filename with a random number will be generated.
+
+
+```bash
+php artisan toolkit:make-mail-job {filename?}
+```
+
+You can provide the filename directly:
+
+```bash
+php artisan toolkit:make-mail-job RegistrationMailingJob
+```
+
+If no filename is provided, the command will ask for one.
+
+If no value is entered again, a default filename will be generated with a random number, for example:
+
+```text
+MailingJob_5832
+```
+
+### Mailing Job
+
+A generated mailing job can be dispatched like this:
+
+```php
+dispatch(new RegistrationMailingJob(
+    type: 'notification',
+    to: [
+        $user->email => $user->name
+    ],
+    subject: 'Your Registration Confirmation',
+    blade: 'mailing.registration-confirmation',
+    data: [
+        'user' => $user,
+    ],
+    attachment: public_path('assets/files/document.pdf'),
+));
+```
+
+The `data` parameter can contain any data required by the mailing job, including arrays, strings, objects, Eloquent models, and other application data.
+
+For example:
+
+```php
+data: [
+    'user' => $user,
+    'registration' => $registration,
+    'facility' => $facility,
+],
+```
+
+The mailing job is queued and can be customized according to the application's requirements.
+
+
 
 ## Features
 

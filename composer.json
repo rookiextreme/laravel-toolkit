@@ -42,5 +42,15 @@
             "Workbench\\Database\\Factories\\": "workbench/database/factories/",
             "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
+    },
+    "extra" : {
+        "laravel": {
+            "providers": [
+                "Rookiextreme\\LaravelToolkit\\Providers\\ToolkitServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
     }
 }
