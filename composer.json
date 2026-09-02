@@ -19,7 +19,8 @@
         "orchestra/testbench": "^11.1"
     },
     "require": {
-        "illuminate/http": "^13.24"
+        "illuminate/http": "^13.24",
+        "simplesoftwareio/simple-qrcode": "~4"
     },
     "scripts": {
         "test": "phpunit",

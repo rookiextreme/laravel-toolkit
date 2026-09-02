@@ -266,6 +266,80 @@ data: [
 
 The mailing job is queued and can be customized according to the application's requirements.
 
+## QR Code
+
+Provides a simple helper for generating QR codes without repeatedly setting up the QR code library in each Laravel project.
+
+### Generate QR Code
+
+```php id="83215"
+$qr = $toolkit->generateQr(
+    extension: 'png',
+    size: 500,
+    value: 'https://example.com'
+);
+```
+
+The method returns the generated QR code output.
+
+### Generate Base64
+
+Pass `true` as the fourth argument to return the QR code as a Base64-encoded string:
+
+```php id="42871"
+$qr = $toolkit->generateQr(
+    extension: 'png',
+    size: 500,
+    value: 'https://example.com',
+    base64: true
+);
+```
+
+This is useful when embedding the QR code directly into an image element.
+
+### Using in Blade
+
+When using the Base64 option, the result can be placed directly into an `<img>` element:
+
+```blade id="59034"
+<img src="data:image/png;base64,{{ $toolkit->generateQr(
+    'png',
+    500,
+    'https://example.com',
+    true
+) }}" alt="QR Code">
+```
+
+You can also generate the QR code in your controller and pass it to the view:
+
+```php id="77126"
+$qr = $toolkit->generateQr(
+    'png',
+    500,
+    'https://example.com',
+    true
+);
+
+return view('example', compact('qr'));
+```
+
+Then in Blade:
+
+```blade id="31548"
+<img src="data:image/png;base64,{{ $qr }}" alt="QR Code">
+```
+
+### Parameters
+
+| Parameter    | Type     | Default | Description                                       |
+| ------------ | -------- | ------- | ------------------------------------------------- |
+| `$extension` | `string` | `png`   | QR code image format                              |
+| `$size`      | `float`  | `500`   | QR code size                                      |
+| `$value`     | `mixed`  | `null`  | Value to encode into the QR code                  |
+| `$base64`    | `bool`   | `false` | Whether to return the generated QR code as Base64 |
+
+If no value is provided, the method returns `null`.
+
 
 
 ## Features
@@ -274,6 +348,7 @@ The mailing job is queued and can be customized according to the application's r
 - ✅ API Response Helper
 - ✅ File Uploaded
 - ✅ Predefined Mailing Job Command
+- ✅ QR Code Generator
 - 🚧 More coming soon
 
 ## Installation
