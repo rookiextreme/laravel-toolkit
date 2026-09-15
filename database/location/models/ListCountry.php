@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CountryLookup extends Model
+class ListCountry extends Model
 {
     public function getStates()
     {

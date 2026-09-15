@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StateLookup extends Model
+class ListState extends Model
 {
     //
 }

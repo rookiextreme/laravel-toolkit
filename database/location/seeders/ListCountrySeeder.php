@@ -7,7 +7,7 @@ use App\Models\StateLookup;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CountryStateLookupSeeder extends Seeder
+class ListCountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
