@@ -5,6 +5,12 @@ A collection of reusable Laravel utilities for common development tasks.
 > ⚠️ This package is currently a personal learning project.
 > It is used to learn Composer packages, PHPUnit, package architecture, and Laravel package development while also serving as a reusable toolkit for my own Laravel applications.
 
+## Installation
+
+```bash
+composer require rookiextreme/laravel-toolkit
+```
+
 ## Usage
 
 ### DateFormatter
@@ -340,31 +346,110 @@ Then in Blade:
 
 If no value is provided, the method returns `null`.
 
+## Location Module
+
+The toolkit can install a reusable Country and State location module into your Laravel application.
+
+The installer publishes:
+
+* Country model
+* State model
+* Country migration
+* State migration
+* Country seeder
+* State seeder
+
+### Installation
+
+Run:
+
+```bash
+php artisan toolkit:install-location
+```
+
+The command will publish the required models, migrations, and seeders into your Laravel application.
+
+After installation, run the migrations:
+
+```bash
+php artisan migrate
+```
+
+Then run the seeders:
+
+```bash
+php artisan db:seed --class=CountrySeeder
+php artisan db:seed --class=StateSeeder
+```
+
+Or run your application's normal seeding process if the location seeders have been added to `DatabaseSeeder`.
+
+### Published Files
+
+The installer publishes the files into the standard Laravel directories:
+
+```text
+app/
+└── Models/
+    ├── Country.php
+    └── State.php
+
+database/
+├── migrations/
+│   ├── *_create_list_countries_table.php
+│   └── *_create_list_states_table.php
+└── seeders/
+    ├── CountrySeeder.php
+    └── StateSeeder.php
+```
+
+The migrations are published with Laravel migration timestamps, with the Country migration ordered before the State migration.
+
+### Relationships
+
+A state belongs to a country, while a country can have multiple states.
+
+Example:
+
+```php
+$country = Country::find(1);
+
+$country->states;
+```
+
+And:
+
+```php
+$state = State::find(1);
+
+$state->country;
+```
+
+The published models are part of your application, so you are free to extend them with additional relationships, scopes, attributes, or application-specific logic.
 
 
 ## Features
 
-- ✅ Date Formatter
-- ✅ API Response Helper
-- ✅ File Uploaded
-- ✅ Predefined Mailing Job Command
-- ✅ QR Code Generator
-- 🚧 More coming soon
-
-## Installation
-
-```bash
-composer require rookiextreme/laravel-toolkit
-```
+* ✅ Date Formatter
+* ✅ API Response Helper
+* ✅ Image Uploader
+* ✅ Predefined Mailing Job Command
+* ✅ QR Code Generator
+* ✅ Location Installer
+* 🚧 More coming soon
 
 ## Roadmap
 
-- [x] Date Formatter
-- [x] API Response Helper
-- [x] Image Uploader
-- [ ] Model Actions
-- [ ] Validation Helpers
-- [ ] File Utilities
+* [x] Date Formatter
+* [x] API Response Helper
+* [x] Image Uploader
+* [x] Predefined Mailing Job Command
+* [x] QR Code Generator
+* [x] Location Installer
+* [ ] Model Actions
+* [ ] Validation Helpers
+* [ ] File Utilities
+
 
 ## License
 
