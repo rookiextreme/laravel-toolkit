@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\CountryLookup;
-use App\Models\StateLookup;
+use App\Models\ListCountry;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -211,7 +210,7 @@ class ListCountrySeeder extends Seeder
         );
 
         foreach($country_list as $cl){
-            CountryLookup::updateOrCreate(
+            ListCountry::updateOrCreate(
                 [
                     'name' => $cl
                 ],

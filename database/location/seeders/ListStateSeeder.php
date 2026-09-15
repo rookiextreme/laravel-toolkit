@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\CountryLookup;
-use App\Models\StateLookup;
+use App\Models\ListCountry;
+use App\Models\ListState;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -35,17 +35,17 @@ class ListStateSeeder extends Seeder
             'BGK' => 'Bangkok'
         ];
 
-        $malaysia = CountryLookup::where('s_name', 'Malaysia')->first();
+        $malaysia = ListCountry::where('s_name', 'Malaysia')->first();
 
         foreach($states as $st){
-            StateLookup::updateOrCreate(
+            ListState::updateOrCreate(
                 [
                     'name' => $st,
                 ],
                 [
                     'name' => $st,
                     's_name' => $st,
-                    'country_lookup_id' => $malaysia->id,
+                    'list_country_id' => $malaysia->id,
                 ]
             );
         }
